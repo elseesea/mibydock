@@ -2,8 +2,12 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.Set;
 
 public class ReadFile {
     public static void main(String[] args) {
@@ -28,15 +32,8 @@ public class ReadFile {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    /* Testing successful building of Stop Words ArrayList
-        for (int i=0; i<5 && i<stopWords.size(); i++) {
-            System.out.println(stopWords.get(i));
-        }
-        System.out.print(stopWords.size());
-    */
 
-
-        // Read line from text
+        // Read lines from text, one line at a time
         String[] wordsInLine;
         try {
             File file = new File("mobydick.txt");
@@ -59,7 +56,34 @@ public class ReadFile {
                 }
             }
             scanner.close();
-            System.out.println(wordCount);
+
+            // Convert map to 2d array
+            Object[][] wordCountAry = new Object[wordCount.size()][2];
+            Set entries = wordCount.entrySet();
+            Iterator entriesIterator = entries.iterator();
+            
+            int j = 0;
+            while(entriesIterator.hasNext()){
+            
+                Map.Entry mapping = (Map.Entry) entriesIterator.next();
+            
+                wordCountAry[j][0] = mapping.getKey();
+                wordCountAry[j][1] = (Integer)mapping.getValue();
+            
+                j++;
+            }
+
+            // Sort 2d array by 2nd dimension, i.e., the count
+            Arrays.sort(wordCountAry, Comparator.comparingInt(o -> (int)o[1]));
+
+            // Output the top 100
+            // Run in reverse, because the array was sorted ascending
+            for (int i=1; i<=100; i++) {
+                int arrayIndex = wordCountAry.length-i;
+                if (i<0)
+                    break;
+                System.out.println(i + ". " + wordCountAry[arrayIndex][0] + ": " + wordCountAry[arrayIndex][1]);
+            }
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

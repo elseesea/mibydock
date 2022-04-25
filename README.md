@@ -1,5 +1,6 @@
 # mibydock
 
+
 read stop-words into array of stop-words
 read a line from text, parse words into a word array
 for each word in word array
