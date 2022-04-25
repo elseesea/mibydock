@@ -12,6 +12,13 @@ import java.util.Set;
 public class ReadFile {
     public static void main(String[] args) {
 
+        Scanner userScanner = new Scanner(System.in);  // Create a Scanner object*
+        System.out.println("****************************************************************************");
+        System.out.println("Welcome to the Moby Dick word frequency analysis. Press <Enter> to continue.");
+        System.out.println("****************************************************************************");
+        String entry = userScanner.nextLine();  // Read user input
+        userScanner.close();
+
         Map wordCount = new HashMap<String, Integer>();
 
         // Build Stop Words ArrayList
@@ -78,6 +85,10 @@ public class ReadFile {
 
             // Output the top 100
             // Run in reverse, because the array was sorted ascending
+            System.out.println("Processing...");
+            System.out.println("****************************************************************************");
+            System.out.println("         The top 100 words in the provided text, mobydick.txt, are:");            
+            System.out.println("****************************************************************************");
             for (int i=1; i<=100; i++) {
                 int arrayIndex = wordCountAry.length-i;
                 if (i<0)
