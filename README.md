@@ -15,6 +15,9 @@ Displays top 100 words used in *Moby Dick* text by word frequency, excluding wor
   - Sort 2d array by second dimension, i.e., the count
   - Print out the 100 most frequent words
 
+## Requirements
+Java 13 (although Java 8+ should work)
+
 ## Todo
 1. Prompt for name of text file, to analyze texts besides Moby Dick
 2. Prompt for name of stop words file
